@@ -36,3 +36,28 @@ function handleButtons(button) {
   else if (action === '=') evaluate();
   else handleOperator(action);
 }
+
+function appendNumber(num) {
+  if (mainDisplay.textContent === '0' || shouldResetDisplay) {
+    mainDisplay.textContent = num;
+    shouldResetDisplay = false;
+  } else if (mainDisplay.textContent.length < 12) {
+    mainDisplay.textContent += num;
+  }
+}
+
+function appendDecimal() {
+  if (shouldResetDisplay) resetDisplay();
+  if (!mainDisplay.textContent.includes('.')) {
+    mainDisplay.textContent += '.';
+  }
+}
+
+function clear() {
+  mainDisplay.textContent = '0';
+  secondaryDisplay.textContent = '';
+  firstOperand = '';
+  secondOperand = '';
+  currentOperator = null;
+  shouldResetDisplay = false;
+}

@@ -52,3 +52,64 @@ function appendDecimal() {
     mainDisplay.textContent += '.';
   }
 }
+
+function clear() {
+  mainDisplay.textContent = '0';
+  secondaryDisplay.textContent = '';
+  firstOperand = '';
+  secondOperand = '';
+  currentOperator = null;
+  shouldResetDisplay = false;
+}
+
+function deleteNumber() {
+  mainDisplay.textContent = mainDisplay.textContent.slice(0, -1) || '0';
+}
+
+function resetDisplay() {
+  mainDisplay.textContent = '0';
+  shouldResetDisplay = false;
+}
+
+function handleOperator(operator) {
+  if (currentOperator !== null && !shouldResetDisplay) {
+    evaluate();
+  }
+  firstOperand = mainDisplay.textContent;
+  currentOperator = operator;
+  shouldResetDisplay = true;
+  secondaryDisplay.textContent = `${firstOperand} ${currentOperator}`;
+}
+
+function evaluate() {
+  if (currentOperator === null || shouldResetDisplay) return;
+
+  secondOperand = mainDisplay.textContent;
+  const result = operate(currentOperator, parseFloat(firstOperand), parseFloat(secondOperand));
+  mainDisplay.textContent = result;
+  secondaryDisplay.textContent = `${firstOperand} ${currentOperator} ${secondOperand}`;
+  firstOperand = result;
+  currentOperator = null;
+  shouldResetDisplay = true;
+}
+
+function operate(operator, a, b) {
+  if (operator === '/' && b === 0) {
+    alert("Can't divide by 0");
+    return 'Error';
+  }
+
+  const operations = {
+    '+': (x, y) => x + y,
+    '-': (x, y) => x - y,
+    '*': (x, y) => x * y,
+    '/': (x, y) => x / y
+  };
+
+  const result = operations[operator](a, b);
+  return Math.round(result * 10000) / 10000;
+}
+
+function percent() {
+  mainDisplay.textContent = parseFloat(mainDisplay.textContent) / 100;
+}

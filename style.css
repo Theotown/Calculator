@@ -87,3 +87,51 @@ h1 {
   background-color: #808693;
   color: #000;
 }
+
+@media (max-width: 768px) {
+  .calculator {
+    width: 90%;
+    padding: 15px;
+  }
+
+  .btn {
+    padding: 16px;
+    font-size: 1rem;
+  }
+
+  #main-display {
+    font-size: 2rem;
+  }
+
+  .secondary-display {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .calculator {
+    width: 100%;
+    margin: 0 10px;
+  }
+
+  .buttons {
+    gap: 10px;
+  }
+
+  .btn {
+    padding: 12px;
+    font-size: 0.9rem;
+  }
+
+  h1 {
+    font-size: 1.6rem;
+  }
+
+  #main-display {
+    font-size: 1.6rem;
+  }
+
+  .secondary-display {
+    font-size: 0.8rem;
+  }
+}
